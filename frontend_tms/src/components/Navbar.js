@@ -7,10 +7,10 @@ const Navbar = () => {
         <nav className="bg-slate-900 p-4 shadow-md">
             <ul className="flex justify-center space-x-6 text-white font-semibold">
                 <li>
-                    <Link to="/" className="hover:text-gray-200">Secure Task Management System(TMS)</Link>
+                    <Link to="/" className="hover:text-cyan-500">Secure Task Management System(TMS)</Link>
                 </li>
                 <li>
-                    <Link to="/tasks" className="hover:text-gray-200">Tasks</Link>
+                    <Link to="/tasks" className="hover:text-cyan-500">Tasks</Link>
                 </li>
                 <button className='bg-indigo-50 text-indigo-950 w-20 h-7 rounded-md'>
                     <Link to="/login" className="hover:text-cyan-500">Login</Link>
