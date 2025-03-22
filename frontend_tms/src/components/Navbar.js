@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <nav className="bg-slate-900 p-4 shadow-md">
+        <nav className="bg-cyan-600 p-4 shadow-md">
             <ul className="flex justify-center space-x-6 text-white font-semibold">
                 <li>
-                    <Link to="/" className="hover:text-cyan-500">Secure Task Management System(TMS)</Link>
+                    <Link to="/" className="hover:text-cyan-950 text-2xl">Secure Task Management System(TMS)</Link>
                 </li>
                 <li>
-                    <Link to="/tasks" className="hover:text-cyan-500">Tasks</Link>
+                    <Link to="/tasks" className="hover:text-cyan-950 text-2xl">Tasks</Link>
                 </li>
-                <button className='bg-indigo-50 text-indigo-950 w-20 h-7 rounded-md'>
-                    <Link to="/login" className="hover:text-cyan-500">Login</Link>
-                </button>
-                <button className='bg-indigo-50 text-indigo-950 w-20 h-7.5 rounded-md'>
-                    <Link to="/register" className="hover:text-cyan-500">Register</Link>
-                </button>
+                    <Link to="/login" className='py-2 px-2 border text-xl  border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
+                     hover:bg-cyan-900 hover:border-cyan-800 hover:text-white'>Login</Link>
+
+                    <Link to="/register" className='py-2 px-2 border text-xl border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
+                     hover:bg-cyan-900 hover:border-cyan-800 hover:text-white'>Register</Link>
+
             </ul>
         </nav>
     )
