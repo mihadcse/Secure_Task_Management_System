@@ -7,6 +7,7 @@ import protect from './authMiddleware.js';
 
 import bcrypt from 'bcryptjs'; // For password hashing
 import jwt from 'jsonwebtoken'; // For JWT authentication
+import Task from './tasks.js';
 
 const app = express();
 const PORT = 5000;
@@ -68,8 +69,33 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
+// DASHBOARD (Protected)
 app.get("/api/dashboard", protect, async (req, res) => {
     res.json({ name: req.user.name, email: req.user.email });
+});
+
+// ADD TASK (Protected)
+app.post("/api/add-tasks", protect, async (req, res) => {
+    try {
+        const { title, description, dueDate, priority } = req.body;
+
+        if (!title || !dueDate) {
+            return res.status(400).json({ message: "Title and Due Date are required" });
+        }
+
+        const newTask = new Task({
+            userId: req.user.id,
+            title,
+            description,
+            dueDate,
+            priority,
+        });
+
+        await newTask.save();
+        res.status(201).json({ message: "Task added successfully", task: newTask });
+    } catch (error) {
+        res.status(500).json({ message: "Error adding task", error });
+    }
 });
 
 
