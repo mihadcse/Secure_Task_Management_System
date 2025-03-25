@@ -12,10 +12,10 @@ const Navbar = () => {
                 <li>
                     <Link to="/tasks" className="hover:text-cyan-950 text-2xl">Tasks</Link>
                 </li>
-                    <Link to="/login" className='py-2 px-2 border text-xl  border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
+                <Link to="/login" className='py-2 px-2 border text-xl  border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
                      hover:bg-cyan-900 hover:border-cyan-800 hover:text-white'>Login</Link>
 
-                    <Link to="/register" className='py-2 px-2 border text-xl border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
+                <Link to="/register" className='py-2 px-2 border text-xl border-cyan-400 rounded bg-cyan-50 text-cyan-950 font-bold
                      hover:bg-cyan-900 hover:border-cyan-800 hover:text-white'>Register</Link>
 
             </ul>
