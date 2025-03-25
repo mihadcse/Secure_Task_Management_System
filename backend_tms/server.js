@@ -110,6 +110,29 @@ app.post("/api/add-tasks", protect, async (req, res) => {
     }
 });
 
+// DELETE TASK (Protected)
+app.delete("/api/tasks/:id", protect, async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const task = await Task.findById(taskId);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        // Ensure the logged-in user owns the task
+        if (task.userId.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Unauthorized to delete this task" });
+        }
+
+        await Task.findByIdAndDelete(taskId);
+        res.json({ message: "Task deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting task", error });
+    }
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
