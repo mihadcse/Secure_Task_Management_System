@@ -73,7 +73,7 @@ const Dashboard = () => {
               {tasks.length > 0 ? (
                 <ul className="mt-4 space-y-4 text-2xl">
                   {tasks.map((task) => (
-                    <li key={task._id} className="border p-4 rounded shadow">
+                    <li key={task._id} className="border p-4 rounded shadow bg-cyan-50 border-cyan-500">
                       <div>
                         <h3 className="text-2xl font-bold text-cyan-700">{task.title}</h3>
                         <p className="text-black text-xl break-words">{task.description}</p>
