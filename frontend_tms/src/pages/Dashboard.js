@@ -6,6 +6,7 @@ const API_URL = "http://localhost:5000/api/dashboard";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +21,8 @@ const Dashboard = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
-        setUser(response.data);
+        setUser(response.data.user);
+        setTasks(response.data.tasks);
       })
       .catch(() => {
         localStorage.removeItem("token");
@@ -37,14 +39,42 @@ const Dashboard = () => {
 
           <br />
           <div className='flex justify-center space-x-4 mt-10 mr-4'>
-            <Link to="/add-task" 
+            <Link to="/add-task"
               className='py-2 px-5 border text-3xl mt-10 mr-4 border-cyan-400 rounded bg-cyan-600 text-white font-bold hover:bg-cyan-900 hover:border-cyan-800'>
-              Add Task
+              + Add Task
             </Link>
-            <Link to="/tasks" 
-              className='py-2 px-5 border text-3xl mt-10 mr-4 border-cyan-400 rounded bg-cyan-600 text-white font-bold hover:bg-cyan-900 hover:border-cyan-800'>
-              Tasks
-            </Link>
+          </div>
+
+          <div>
+            {/* Task List */}
+            <div className="mt-6">
+              <h2 className="text-2xl font-semibold text-center">My Tasks</h2>
+              {tasks.length > 0 ? (
+                <ul className="mt-4 space-y-4">
+                  {tasks.map((task) => (
+                    <li key={task._id} className="border p-4 rounded shadow">
+                      <h3 className="text-xl font-semibold">{task.title}</h3>
+                      <p className="text-gray-700">{task.description}</p>
+                      <p className="text-sm text-gray-500">
+                        Due: {new Date(task.dueDate).toLocaleDateString()}
+                      </p>
+                      <span
+                        className={`px-3 py-1 text-sm font-bold rounded ${task.priority === "High"
+                          ? "bg-red-500 text-white"
+                          : task.priority === "Medium"
+                            ? "bg-yellow-500 text-black"
+                            : "bg-green-500 text-black"
+                          }`}
+                      >
+                        {task.priority}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 mt-4">No tasks added yet.</p>
+              )}
+            </div>
           </div>
         </>
       ) : (

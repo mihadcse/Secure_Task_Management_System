@@ -71,8 +71,20 @@ app.post("/api/login", async (req, res) => {
 
 // DASHBOARD (Protected)
 app.get("/api/dashboard", protect, async (req, res) => {
-    res.json({ name: req.user.name, email: req.user.email });
+    try {
+        // Fetch user details
+        const user = { name: req.user.name, email: req.user.email };
+        //res.json({ name: req.user.name, email: req.user.email });
+
+        // Fetch tasks associated with the logged-in user
+        const tasks = await Task.find({ userId: req.user.id });
+
+        res.json({ user, tasks }); // Send both user details & tasks
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching dashboard data", error });
+    }
 });
+
 
 // ADD TASK (Protected)
 app.post("/api/add-tasks", protect, async (req, res) => {
