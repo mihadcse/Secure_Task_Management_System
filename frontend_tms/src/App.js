@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Tasks from './pages/Tasks';
 import Dashboard from './pages/Dashboard';
+import AddTask from './pages/AddTask';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-task" element={<AddTask />} />
       </Routes>
     </Router >
   )
