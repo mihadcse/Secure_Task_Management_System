@@ -164,6 +164,30 @@ app.put("/api/tasks/:id", protect, async (req, res) => {
 });
 
 
+// task completion status (Completed/Not Completed)
+app.put("/api/tasks/:id/completed", protect, async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        let task = await Task.findById(taskId);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        // Ensure the logged-in user owns the task
+        if (task.userId.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Unauthorized to update this task" });
+        }
+
+        // Toggle completion status
+        task.completed = !task.completed;
+        await task.save();
+
+        res.json({ message: "Task updated successfully", task });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating task", error });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
