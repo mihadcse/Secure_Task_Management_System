@@ -133,6 +133,37 @@ app.delete("/api/tasks/:id", protect, async (req, res) => {
 });
 
 
+// UPDATE TASK (Protected)
+app.put("/api/tasks/:id", protect, async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const { title, description, dueDate, priority } = req.body;
+
+        let task = await Task.findById(taskId);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        // Ensure the logged-in user owns the task
+        if (task.userId.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Unauthorized to update this task" });
+        }
+
+        task.title = title || task.title;
+        task.description = description || task.description;
+        task.dueDate = dueDate || task.dueDate;
+        task.priority = priority || task.priority;
+
+        await task.save();
+
+        res.json({ message: "Task updated successfully", task });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating task", error });
+    }
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
