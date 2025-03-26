@@ -102,14 +102,14 @@ const Dashboard = () => {
       navigate("/login");
       return;
     }
-  
+
     try {
       const response = await Axios.put(
         `http://localhost:5000/api/tasks/${taskId}/completed`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
+
       // Update the tasks state with the toggled task
       setTasks(tasks.map(task =>
         task._id === taskId ? response.data.task : task
@@ -118,7 +118,7 @@ const Dashboard = () => {
       console.error("Error toggling task completion", error);
     }
   };
-  
+
 
 
   return (
@@ -203,12 +203,23 @@ const Dashboard = () => {
                           {task.priority}
                         </span>
                       </div>
+
+                      {/* Display Task Completion Status */}
+                      <div className="mt-4">
+                        <button
+                          onClick={() => handleToggleCompletion(task._id)}
+                          className={`py-2 px-4 rounded font-semibold ${task.completed ? "bg-green-500" : "bg-gray-500"} text-white`}
+                        >
+                          {task.completed ? "Completed" : "Not Completed"}
+                        </button>
+                      </div>
+
                       <button
                         onClick={() => {
                           setEditTask(task);
                           setEditTitle(task.title);
                           setEditDescription(task.description);
-                          setEditDueDate(task.dueDate.split("T")[0]); 
+                          setEditDueDate(task.dueDate.split("T")[0]);
                           setEditPriority(task.priority);
                         }}
                         className="bg-teal-700 mt-4 mr-4 text-white text-lg font-semibold px-4 py-1 rounded hover:bg-teal-950"
