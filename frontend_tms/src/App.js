@@ -8,7 +8,8 @@ import Tasks from './pages/Tasks';
 import Dashboard from './pages/Dashboard';
 import AddTask from './pages/AddTask';
 import Footer from './components/Footer';
-import Admin from './components/Admin';
+import Admin from './pages/Admin';
+
 
 const App = () => {
   return (
