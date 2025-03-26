@@ -5,9 +5,9 @@ This is a Secure Task Management System built using the MERN stack (MongoDB, Exp
 ## Features
 - User authentication with JWT
 - Secure task creation, updating, and deletion
-- Task categorization and filtering
+- Task priority filtering
 - Proper error handling and validation
-- RESTful API with Express.js and MongoDB
+- Postman API with Express.js and MongoDB
 
 ## Prerequisites
 Ensure you have the following installed on your system:
@@ -58,4 +58,8 @@ The React frontend should now be running on `http://localhost:3000`.
 - Register or log in with valid credentials.
 - Create, update, delete, and filter tasks.
 - Manage tasks efficiently with security-enhanced authentication.
+
+### Created By-
+- Syed Huzzatullah Mihad
+- CSE-2 ID-210041218
 
