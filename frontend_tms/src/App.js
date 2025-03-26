@@ -8,6 +8,7 @@ import Tasks from './pages/Tasks';
 import Dashboard from './pages/Dashboard';
 import AddTask from './pages/AddTask';
 import Footer from './components/Footer';
+import Admin from './components/Admin';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-task" element={<AddTask />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         </main>
         <Footer />
