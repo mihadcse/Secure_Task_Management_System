@@ -192,7 +192,7 @@ app.put("/api/tasks/:id/completed", protect, async (req, res) => {
 // GET ALL USERS (Admin Only)
 app.get("/api/admin/users", protect, async (req, res) => {
     try {
-        if (req.user.email !== "admin@example.com") {
+        if (req.user.password !== "admin123") {
             return res.status(403).json({ message: "Unauthorized: Admin access required" });
         }
 
