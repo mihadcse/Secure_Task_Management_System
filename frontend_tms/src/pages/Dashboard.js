@@ -7,6 +7,13 @@ const API_URL = "http://localhost:5000/api/dashboard";
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [tasks, setTasks] = useState([]);
+
+  const [editTask, setEditTask] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editDueDate, setEditDueDate] = useState("");
+  const [editPriority, setEditPriority] = useState("Low");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,6 +57,35 @@ const Dashboard = () => {
     }
   };
 
+  const handleUpdateTask = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await Axios.put(
+        `http://localhost:5000/api/tasks/${editTask._id}`,
+        {
+          title: editTitle,
+          description: editDescription,
+          dueDate: editDueDate,
+          priority: editPriority,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setTasks(tasks.map(task => (task._id === editTask._id ? response.data.task : task)));
+      setEditTask(null);
+      alert("Task updated successfully!");
+    } catch (error) {
+      console.error("Error updating task", error);
+    }
+  };
+
 
   return (
     <div className="container mx-auto p-6">
@@ -71,9 +107,33 @@ const Dashboard = () => {
             <div className="mt-6 ml-36 w-9/12">
               <h2 className="text-3xl font-semibold text-center">My Tasks</h2>
               {tasks.length > 0 ? (
-                <ul className="mt-4 space-y-4 text-2xl">
+                <ul className="mt-4 space-y-4 ">
                   {tasks.map((task) => (
                     <li key={task._id} className="border p-4 rounded shadow bg-cyan-50 border-cyan-500">
+                      {/* EDIT TASK OPTIONS */}
+                      {editTask && editTask._id === task._id && (
+                        <div className="mt-6 p-4 bg-gray-100 border rounded border-cyan-400">
+                          <h2 className="text-xl font-semibold text-center">Edit Task</h2>
+                          <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+                          <input type="text" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
+                          <input type="date" value={editDueDate} onChange={(e) => setEditDueDate(e.target.value)} />
+                          <select value={editPriority} onChange={(e) => setEditPriority(e.target.value)} >
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                          </select>
+                          <button onClick={handleUpdateTask} className="bg-green-500 text-white px-4 py-2 mt-2">
+                            Update
+                          </button>
+                          <button
+                            onClick={() => setEditTask(null)}
+                            className="bg-gray-500 text-white px-4 py-2 mt-2 ml-2 rounded"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      )}
+
                       <div>
                         <h3 className="text-2xl font-bold text-cyan-700 mb-1">{task.title}</h3>
                         <p className="text-black text-xl break-words mb-1">{task.description}</p>
@@ -92,8 +152,20 @@ const Dashboard = () => {
                         </span>
                       </div>
                       <button
+                        onClick={() => {
+                          setEditTask(task);
+                          setEditTitle(task.title);
+                          setEditDescription(task.description);
+                          setEditDueDate(task.dueDate.split("T")[0]); // Ensure proper date format
+                          setEditPriority(task.priority);
+                        }}
+                        className="bg-teal-700 mt-4 mr-4 text-white text-lg font-semibold px-4 py-2 rounded hover:bg-red-700"
+                      >
+                        Edit
+                      </button>
+                      <button
                         onClick={() => handleDeleteTask(task._id)}
-                        className="bg-red-500 mt-4 text-white text-lg font-semibold px-4 py-2 rounded hover:bg-red-700"
+                        className="bg-red-700 mt-4 text-white text-lg font-semibold px-4 py-2 rounded hover:bg-red-950"
                       >
                         Delete
                       </button>
@@ -105,6 +177,7 @@ const Dashboard = () => {
               )}
             </div>
           </div>
+
         </>
       ) : (
         <p>Loading...</p>
