@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import AddTask from './pages/AddTask';
 import Footer from './components/Footer';
 import Admin from './pages/Admin';
+import AdminDashboard from './pages/AdminDashboard';
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-task" element={<AddTask />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
         </main>
         <Footer />

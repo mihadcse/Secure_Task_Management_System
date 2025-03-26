@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 const Admin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -10,11 +12,11 @@ const Admin = () => {
 
     if (password === "admin123") { // Hardcoded password
       alert("Admin login successful!");
+      navigate("/admin-dashboard");
     } else {
       setError("Invalid password");
     }
   };
-
 
   return (
     <div className="flex justify-center py-10">
