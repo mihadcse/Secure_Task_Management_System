@@ -25,7 +25,7 @@ cd Secure_Task_Management_System
 
 ### 2. Setup Backend (Express.js & MongoDB)
 ```sh
-cd backend
+cd backend_tms
 npm install
 ```
 
@@ -44,7 +44,7 @@ The backend server should now be running on `http://localhost:5000`.
 
 ### 3. Setup Frontend (React)
 ```sh
-cd ../frontend
+cd ../frontend_tms
 npm install
 ```
 
@@ -59,7 +59,7 @@ The React frontend should now be running on `http://localhost:3000`.
 - Create, update, delete, and filter tasks.
 - Manage tasks efficiently with security-enhanced authentication.
 
-### Created By-
+## Created By-
 - Syed Huzzatullah Mihad
 - CSE-2 ID-210041218
 
