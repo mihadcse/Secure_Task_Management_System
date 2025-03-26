@@ -90,6 +90,7 @@ const Dashboard = () => {
     }
   };
 
+  // Apply search and filter options
   const filteredTasks = tasks.filter(task =>
     task.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (priorityFilter === "All" || task.priority === priorityFilter)
@@ -115,19 +116,15 @@ const Dashboard = () => {
             {/* FILTER AND SEARCH TASK */}
             <h2 className="text-3xl font-semibold text-center mt-6 mb-3">Filter and Search Tasks</h2>
             <div className="flex justify-center space-x-4">
-              <input type="text" placeholder="Search tasks" className="border rounded-md border-cyan-600 mr-1" />
-              <button className="bg-cyan-600 text-white text-lg font-semibold rounded px-4 py-1 hover:bg-cyan-800">
-                Search
-              </button>
-              <select className="border rounded-md border-cyan-600 mr-4" >
+              <input type="text" placeholder="Search tasks" value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} className="border-2 rounded-md border-cyan-600 mr-1 px-4 py-1" />
+              <select className="border-2 rounded-md border-cyan-600 mr-4 px-4 py-1" value={priorityFilter}
+                onChange={(e) => setPriorityFilter(e.target.value)} >
                 <option value="All">All</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
               </select>
-              <button className="bg-cyan-600 text-white text-lg font-semibold rounded px-4 py-1 hover:bg-cyan-800">
-                Filter
-              </button>
             </div>
           </div>
 
@@ -135,9 +132,11 @@ const Dashboard = () => {
             {/* Task List */}
             <div className="mt-6 ml-36 w-9/12">
               <h2 className="text-3xl font-semibold text-center">My Tasks</h2>
-              {tasks.length > 0 ? (
+              {/* {tasks.length > 0 ? ( */}
+              {filteredTasks.length > 0 ? (
                 <ul className="mt-4 space-y-4 ">
-                  {tasks.map((task) => (
+                  {/* {tasks.map((task) => ( */}
+                  {filteredTasks.map((task) => (
                     <li key={task._id} className="border p-4 rounded shadow bg-cyan-50 border-cyan-500">
                       {/* EDIT TASK OPTIONS */}
                       {editTask && editTask._id === task._id && (
@@ -185,7 +184,7 @@ const Dashboard = () => {
                           setEditTask(task);
                           setEditTitle(task.title);
                           setEditDescription(task.description);
-                          setEditDueDate(task.dueDate.split("T")[0]); // Ensure proper date format
+                          setEditDueDate(task.dueDate.split("T")[0]); 
                           setEditPriority(task.priority);
                         }}
                         className="bg-teal-700 mt-4 mr-4 text-white text-lg font-semibold px-4 py-1 rounded hover:bg-teal-950"
