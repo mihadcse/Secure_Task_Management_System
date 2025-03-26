@@ -112,22 +112,22 @@ const Dashboard = () => {
                     <li key={task._id} className="border p-4 rounded shadow bg-cyan-50 border-cyan-500">
                       {/* EDIT TASK OPTIONS */}
                       {editTask && editTask._id === task._id && (
-                        <div className="mt-6 p-4 bg-gray-100 border rounded border-cyan-400">
+                        <div className="mt-6 p-4 bg-cyan-100 border rounded border-cyan-400">
                           <h2 className="text-xl font-semibold text-center">Edit Task</h2>
-                          <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
-                          <input type="text" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
-                          <input type="date" value={editDueDate} onChange={(e) => setEditDueDate(e.target.value)} />
-                          <select value={editPriority} onChange={(e) => setEditPriority(e.target.value)} >
+                          <input type="text" className="border rounded-md border-gray-500 mr-1" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+                          <input type="text" className="border rounded-md border-gray-500 mr-1" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
+                          <input type="date" className="border rounded-md border-gray-500 mr-1" value={editDueDate} onChange={(e) => setEditDueDate(e.target.value)} />
+                          <select className="border rounded-md border-gray-500 mr-1" value={editPriority} onChange={(e) => setEditPriority(e.target.value)} >
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
                           </select>
-                          <button onClick={handleUpdateTask} className="bg-green-500 text-white px-4 py-2 mt-2">
+                          <button onClick={handleUpdateTask} className="bg-green-600 text-white text-lg font-semibold rounded px-4 py-1 mt-2 hover:bg-green-800">
                             Update
                           </button>
                           <button
                             onClick={() => setEditTask(null)}
-                            className="bg-gray-500 text-white px-4 py-2 mt-2 ml-2 rounded"
+                            className="bg-gray-700 text-white text-lg font-semibold rounded px-4 py-1 mt-2 ml-2 hover:bg-teal-950"
                           >
                             Cancel
                           </button>
@@ -159,13 +159,13 @@ const Dashboard = () => {
                           setEditDueDate(task.dueDate.split("T")[0]); // Ensure proper date format
                           setEditPriority(task.priority);
                         }}
-                        className="bg-teal-700 mt-4 mr-4 text-white text-lg font-semibold px-4 py-2 rounded hover:bg-red-700"
+                        className="bg-teal-700 mt-4 mr-4 text-white text-lg font-semibold px-4 py-1 rounded hover:bg-teal-950"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDeleteTask(task._id)}
-                        className="bg-red-700 mt-4 text-white text-lg font-semibold px-4 py-2 rounded hover:bg-red-950"
+                        className="bg-red-700 mt-4 text-white text-lg font-semibold px-4 py-1 rounded hover:bg-red-950"
                       >
                         Delete
                       </button>
