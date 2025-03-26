@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Admin = () => {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (password === "admin123") { // Hardcoded password
+      alert("Admin login successful!");
+    } else {
+      setError("Invalid password");
+    }
+  };
+
+
   return (
     <div className="flex justify-center py-10">
       <div className="bg-cyan-50 p-6 border border-cyan-500 rounded-lg shadow-lg w-full max-w-md">
