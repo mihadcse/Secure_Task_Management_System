@@ -96,6 +96,30 @@ const Dashboard = () => {
     (priorityFilter === "All" || task.priority === priorityFilter)
   );
 
+  const handleToggleCompletion = async (taskId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+  
+    try {
+      const response = await Axios.put(
+        `http://localhost:5000/api/tasks/${taskId}/completed`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+  
+      // Update the tasks state with the toggled task
+      setTasks(tasks.map(task =>
+        task._id === taskId ? response.data.task : task
+      ));
+    } catch (error) {
+      console.error("Error toggling task completion", error);
+    }
+  };
+  
+
 
   return (
     <div className="container mx-auto p-6">
