@@ -1,21 +1,19 @@
-import { Axios } from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 
 const Admin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (password === "admin123") { // Hardcoded password
-      const response = await Axios.post("http://localhost:5000/api/admin/users", password);
-      localStorage.setItem("token", response.data.token); 
+    if (password === "admin123") { // Hardcoded admin password
+      localStorage.setItem("admin_logged_in", "true"); // Store admin session
       alert("Admin login successful!");
-      navigate("/admin-dashboard");
+      navigate("/admin-dashboard"); 
     } else {
       setError("Invalid password");
     }

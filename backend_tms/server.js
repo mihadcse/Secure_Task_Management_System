@@ -190,21 +190,14 @@ app.put("/api/tasks/:id/completed", protect, async (req, res) => {
 });
 
 // GET ALL USERS (Admin Only)
-app.get("/api/admin/users", protect, async (req, res) => {
+app.get("/api/admin/users", async (req, res) => {
     try {
-        if (req.user.password !== "admin123") {
-            return res.status(403).json({ message: "Unauthorized: Admin access required" });
-        }
-
-        const users = await User.find({}, "name email");
-        const totalUsers = users.length;
-
-        res.json({ totalUsers, users });
+        const users = await User.find({}, "name email"); // Fetch only name & email
+        res.json({ users });
     } catch (error) {
         res.status(500).json({ message: "Error fetching users", error });
     }
 });
-
 
 
 app.listen(PORT, () => {
