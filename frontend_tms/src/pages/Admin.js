@@ -21,10 +21,14 @@ const Admin = () => {
       <div className="bg-cyan-50 p-6 border border-cyan-500 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-cyan-900 mb-4">Admin Login</h1>
 
-        <form className="border p-4 rounded-md shadow-md bg-gray-50 space-y-4" >
+        {error && <p className="text-red-500 text-center">{error}</p>}
+
+        <form className="border p-4 rounded-md shadow-md bg-gray-50 space-y-4" onSubmit={handleLogin} >
           <input
             type="password"
             placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
