@@ -5,18 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem('token'); // Remove the token from localStorage
-        navigate('/');
-    };
-
     const token = localStorage.getItem('token');  // Check if user is logged in
+    const isAdminLoggedIn = localStorage.getItem("admin_logged_in"); // For admin
+
+    const handleLogout = () => {
+        if (isAdminLoggedIn) {
+            localStorage.removeItem("admin_logged_in"); // Remove admin session
+            navigate("/admin");
+        } else {
+            localStorage.removeItem("token"); // Remove user token
+            navigate("/");
+        }
+    };
 
     return (
         <nav className="bg-cyan-600 p-4 shadow-md">
             <ul className="flex justify-center space-x-6 text-white font-semibold">
                 {/* If user is logged in, show only the system name and logout button */}
-                {token ? (
+                {(token || isAdminLoggedIn) ? (
                     <>
                         <li className="text-2xl">Secure Task Management System(TMS)</li>
                         <button

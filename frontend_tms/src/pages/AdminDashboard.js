@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [navigate]);
 
     return (
         <div className="max-w-3xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
