@@ -103,6 +103,26 @@ const Dashboard = () => {
           </div>
 
           <div>
+            {/* FILTER AND SEARCH TASK */}
+            <h2 className="text-3xl font-semibold text-center mt-6 mb-3">Filter and Search Tasks</h2>
+            <div className="flex justify-center space-x-4">
+              <input type="text" placeholder="Search tasks" className="border rounded-md border-cyan-600 mr-1" />
+              <button className="bg-cyan-600 text-white text-lg font-semibold rounded px-4 py-1 hover:bg-cyan-800">
+                Search
+              </button>
+              <select className="border rounded-md border-cyan-600 mr-4" >
+                <option value="All">All</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+              <button className="bg-cyan-600 text-white text-lg font-semibold rounded px-4 py-1 hover:bg-cyan-800">
+                Filter
+              </button>
+            </div>
+          </div>
+
+          <div>
             {/* Task List */}
             <div className="mt-6 ml-36 w-9/12">
               <h2 className="text-3xl font-semibold text-center">My Tasks</h2>
