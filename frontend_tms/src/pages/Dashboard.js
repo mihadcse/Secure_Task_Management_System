@@ -14,6 +14,10 @@ const Dashboard = () => {
   const [editDueDate, setEditDueDate] = useState("");
   const [editPriority, setEditPriority] = useState("Low");
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("All");
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,6 +89,11 @@ const Dashboard = () => {
       console.error("Error updating task", error);
     }
   };
+
+  const filteredTasks = tasks.filter(task =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (priorityFilter === "All" || task.priority === priorityFilter)
+  );
 
 
   return (
