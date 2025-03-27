@@ -11,8 +11,8 @@ This is a Secure Task Management System built using the MERN stack (MongoDB, Exp
 
 ## Prerequisites
 Ensure you have the following installed on your system:
-- [Node.js](https://nodejs.org/) (v16 or later)
-- [MongoDB](https://www.mongodb.com/) (Local or Atlas Cloud Database)
+- [Node.js](https://nodejs.org/) 
+- [MongoDB](https://www.mongodb.com/) 
 - [Git](https://git-scm.com/)
 
 ## Demo Video
